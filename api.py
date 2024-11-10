@@ -6,7 +6,7 @@ import uvicorn
 
 app = FastAPI()
 
-@app.get("/dnslookup/")
+@app.get("/dnslookup")
 async def dnslookup(record_type: record_type, request: Request):
     results = {}
     domains = await request.json()
