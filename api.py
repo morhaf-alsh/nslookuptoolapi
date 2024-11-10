@@ -14,4 +14,4 @@ async def dnslookup(record_type: record_type, request: Request):
     return results
 
 if __name__ == '__main__':
-    uvicorn.run("api:app", port=80, host="0.0.0.0", reload=False)
+    uvicorn.run("api:app", port=443, host="0.0.0.0", reload=False)
