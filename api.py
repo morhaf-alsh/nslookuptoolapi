@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/dnslookup")
+@app.post("/dnslookup")
 async def dnslookup(record_type: record_type, request: Request):
     results = {}
     domains = await request.json()
