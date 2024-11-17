@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Upload</title>
+  <link rel="stylesheet" href="nslookup.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>Upload Domain Names</h2>
+
+    <form id="domainForm">
+      <label>Enter Domains (up to 10):</label>
+      <div id="domainInputs"></div>
+      <button type="button" onclick="addDomainInput()">Add Domain</button>
+      <label>Or Upload CSV (up to 100 domains):</label>
+      <label id="uploadLabel" for="csvFile">Upload File Here</label>
+      <input type="file" id="csvFile" accept=".csv" />
+      <label>Choose Record type:</label>
+      <select>
+        <option value="A">A</option>
+        <option value="MX">MX</option>
+        <option value="NS">NS</option>
+        <option value="CNAME">CNAME</option>
+        <option value="SOA">SOA</option>
+        <option value="SPF">SPF</option>
+      </select>
+      <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <div id="responseMessage"></div>
+  </div>
+
+  <script src="nslookup.js"></script>
+</body>
+</html>
