@@ -8,12 +8,16 @@ const maxCsvDomains = 100;
 function addDomainInput() {
   if (domainCount < maxManualDomains) {
     const inputDiv = document.createElement("div");
-    inputDiv.innerHTML = `<div class="row"><input type="text" name="domain" placeholder="Enter domain name" required> <button id="delete">delete</button><div>`;
+    inputDiv.innerHTML = `<div class="row"><input type="text" name="domain" placeholder="Enter domain name" required> <button onclick="deleteDomainInput(this)" id="delete" >delete</button><div>`;
     document.getElementById("domainInputs").appendChild(inputDiv);
     domainCount++;
   } else {
     alert(`You can only add up to ${maxManualDomains} domains manually.`);
   }
+}
+
+function deleteDomainInput(element){
+    element.parentNode.parentNode.removeChild(element.parentNode);
 }
 
 // Reads CSV file and extracts domains
@@ -66,18 +70,28 @@ async function submitForm() {
     return;
   }
 
-  console.log(domains);
+  // get the record type
+  const recordType = document.querySelector("select").value;
+
   // Send domains to the remote API
   try {
     const url = new URL("https://nslookuptoolapi.vercel.app/dnslookup");
-    url.searchParams.append("record_type", "A");
+    url.searchParams.set("record_type", recordType);
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(domains)
     });
     const result = await response.json();
-    document.getElementById("responseMessage").textContent = result.message || "Domains uploaded successfully!";
+    // document.getElementById("responseMessage").textContent = result.message || "Domains uploaded successfully!";
+    const responseMessage = document.getElementById('responseMessage');
+    responseMessage.innerHTML = "";
+    for (let domain in result){
+      const domainOutput = document.createElement("div");
+      responseMessage.appendChild(domainOutput)
+      domainOutput.classList.add('output-domain');
+      domainOutput.innerHTML = `<strong>${domain}</strong>: ${result[domain]}`;
+    }
   } catch (error) {
     document.getElementById("responseMessage").textContent = "Failed to upload domains.";
   }
