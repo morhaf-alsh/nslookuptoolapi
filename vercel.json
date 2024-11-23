@@ -11,8 +11,7 @@
             "src": "/(.*)",
             "dest": "api.py",
             "headers": {
-                "Access-Control-Allow-Origin": ["https://www.morhafsh.com", "https://morhafsh.com"]
-              }
-        }
+                "Access-Control-Allow-Origin": "https://www.morhafsh.com"
+        }}
     ]
 }
