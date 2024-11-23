@@ -18,6 +18,7 @@ function addDomainInput() {
 
 function deleteDomainInput(element){
     element.parentNode.parentNode.removeChild(element.parentNode);
+    domainCount--;
 }
 
 // Reads CSV file and extracts domains
@@ -26,7 +27,7 @@ function handleCsvUpload(file) {
     const reader = new FileReader();
     reader.onload = function(event) {
       const rows = event.target.result.split("\n").map(row => row.trim());
-      if (rows.length > maxCsvDomains) {
+      if ((rows.length-1) > maxCsvDomains) {
         reject(`CSV file can contain up to ${maxCsvDomains} domains.`);
       } else {
         resolve(rows.filter(row => row.length > 0));
