@@ -7,14 +7,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "https://www.morhafsh.com",
-    "https://morhafsh.com"
-]
+# origins = [
+#     "https://www.morhafsh.com",
+#     "https://morhafsh.com"
+# ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins="*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
