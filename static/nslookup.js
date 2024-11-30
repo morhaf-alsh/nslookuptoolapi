@@ -104,12 +104,11 @@ async function submitForm() {
       domainOutput.innerHTML = `<strong>${domain}</strong>:`;
       let ul = document.createElement("ul");
       domainOutput.appendChild(ul);
-      console.log(result[domain])
-      // result[domain].forEach((item) => {
-      // let li = document.createElement("li");
-      // li.innerHTML = item;
-      // ul.appendChild(li);
-      // })
+      result[domain].forEach((item) => {
+      let li = document.createElement("li");
+      li.innerHTML = item;
+      ul.appendChild(li);
+      })
     }
   } catch (error) {
     console.log(error)
