@@ -11,9 +11,9 @@ def lookup(domains, record_type):
             results[domain] = [str(answer) for answer in answers]
         
         except dns.resolver.NoAnswer:
-            results[domain] = "No answer found"
+            results[domain] = ["No answer found"]
         except dns.resolver.NXDOMAIN:
-            results[domain] = "Domain not found"
+            results[domain] = ["Domain not found"]
         except Exception as e:
             results[domain] = str(e)
     return results

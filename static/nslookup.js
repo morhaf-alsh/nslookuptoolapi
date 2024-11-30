@@ -38,6 +38,16 @@ function handleCsvUpload(file) {
   });
 }
 
+function makeCSV(){
+  csvRows = [];
+  const headers = Object.keys(domains);
+  const values = Object.values(domains).join(',');
+  csvRows.push(values)
+  console.log(csvRows.join('\n'));
+
+
+}
+
 // Handles form submission
 async function submitForm() {
   const domains = [];
@@ -91,9 +101,18 @@ async function submitForm() {
       const domainOutput = document.createElement("div");
       responseMessage.appendChild(domainOutput)
       domainOutput.classList.add('output-domain');
-      domainOutput.innerHTML = `<strong>${domain}</strong>: ${result[domain]}`;
+      domainOutput.innerHTML = `<strong>${domain}</strong>:`;
+      let ul = document.createElement("ul");
+      domainOutput.appendChild(ul);
+      console.log(result[domain])
+      // result[domain].forEach((item) => {
+      // let li = document.createElement("li");
+      // li.innerHTML = item;
+      // ul.appendChild(li);
+      // })
     }
   } catch (error) {
+    console.log(error)
     document.getElementById("responseMessage").textContent = "Failed to upload domains.";
   }
 }
