@@ -38,12 +38,25 @@ function handleCsvUpload(file) {
   });
 }
 
-function makeCSV(){
+function downloadCSV(){
+  recordType = document.querySelector("select").value;
   csvRows = [];
-  const headers = Object.keys(domains);
-  const values = Object.values(domains).join(',');
-  csvRows.push(values)
-  console.log(csvRows.join('\n'));
+  csv = []
+  headers = ["domain", recordType + " Record"];
+  for (let domain in result) {
+    const value = [domain , result[domain].join('  ')];
+    csvRows.push(value);
+  }
+  // join the rows with new line, then join them with headers with a new line between them
+  csv.push([headers, csvRows.join('\n')].join('\n'))
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'domain.csv';
+  // Trigger the download by clicking the anchor tag
+  a.click();
+
 
 
 }
@@ -93,7 +106,7 @@ async function submitForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(domains)
     });
-    const result = await response.json();
+    globalThis.result = await response.json();
     // document.getElementById("responseMessage").textContent = result.message || "Domains uploaded successfully!";
     const responseMessage = document.getElementById('responseMessage');
     responseMessage.innerHTML = "";
