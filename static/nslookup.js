@@ -1,7 +1,7 @@
 // script.js
 
 let domainCount = 0;
-const maxManualDomains = 10;
+const maxManualDomains = 9;
 const maxCsvDomains = 100;
 
 // Adds a new domain input field
@@ -38,13 +38,27 @@ function handleCsvUpload(file) {
   });
 }
 
+// display uploaded file name
+window.onload = function() {
+  fileInput = document.getElementById('csvFile');
+  document.getElementById('csvFile').addEventListener('change', getFileName);
+}
+
+const getFileName = (event) => {
+  const files = event.target.files;
+  const fileName = files[0].name;
+  fileNameDiv = document.getElementById('fileName');
+  fileNameDiv.innerHTML = '';
+  fileNameDiv.innerHTML = fileName;
+}
+//
 function downloadCSV(){
   recordType = document.querySelector("select").value;
   csvRows = [];
   csv = []
   headers = ["domain", recordType + " Record"];
   for (let domain in result) {
-    const value = [domain , result[domain].join('  ')];
+    const value = [domain , result[domain].join(',')];
     csvRows.push(value);
   }
   // join the rows with new line, then join them with headers with a new line between them

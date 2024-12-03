@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Domain Upload</title>
+  <title>Bulk DNS Lookup Tool</title>
   <link rel="stylesheet" href="nslookup.css">
 </head>
 <body>
 
   <div class="container">
-    <h2>Upload Domain Names</h2>
+    <h2>Enter Domain Names</h2>
 
     <form id="domainForm">
       <label>Enter Domains (up to 10):</label>
-      <div id="domainInputs"></div>
+      <div id="domainInputs">
+        <div>
+          <div class="row">
+            <input type="text" name="domain" placeholder="Enter domain name" required>
+            </div>
+        </div>
+      </div>
       <button type="button" onclick="addDomainInput()">Add Domain</button>
       <label>Or Upload CSV (up to 100 domains):</label>
       <label id="uploadLabel" for="csvFile">Upload File Here</label>
       <input type="file" id="csvFile" accept=".csv" />
+      <div id="fileName"></div>
       <label>Choose Record type:</label>
       <select>
         <option value="A">A</option>
