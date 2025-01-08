@@ -12,7 +12,7 @@ function addDomainInput() {
     document.getElementById("domainInputs").appendChild(inputDiv);
     domainCount++;
   } else {
-    alert(`You can only add up to ${maxManualDomains} domains manually.`);
+    alert(`You can only add up to ${maxManualDomains+1} domains manually.`);
   }
 }
 
@@ -103,8 +103,8 @@ async function submitForm() {
     document.getElementById("responseMessage").textContent = "Please enter or upload at least one domain.";
     return;
   }
-  if (domains.length > maxCsvDomains) {
-    document.getElementById("responseMessage").textContent = `Total domains cannot exceed ${maxCsvDomains}.`;
+  if (domains.length > maxCsvDomains+maxManualDomains+1) {
+    document.getElementById("responseMessage").textContent = `Total domains cannot exceed ${maxCsvDomains+maxManualDomains+1}.`;
     return;
   }
 
